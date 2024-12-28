@@ -30,6 +30,17 @@
             font-size: 3em;
             margin-bottom: 20px;
         }
+        .notice {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .notice img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
         p {
             font-size: 1.5em;
             line-height: 1.8;
@@ -55,7 +66,12 @@
 <body>
     <div class="container">
         <h1>공지사항</h1>
-        <p>현재 새로운 공지가 없습니다.<br>추후 업데이트를 기대해 주세요!</p>
+        <div class="notice">
+            <h2>서버 업데이트 안내</h2>
+            <p>2024년 12월 28일</p>
+            <img src="image/image1.jpg" alt="업데이트 이미지">
+            <p>서버 안정성 개선 및 새로운 기능이 추가되었습니다. 자세한 사항은 디스코드 채널을 확인해 주세요.</p>
+        </div>
         <a href="index.html" class="home-btn">메인 페이지로 돌아가기</a>
     </div>
 </body>
