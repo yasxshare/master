@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="디스코드 서버에 참여하고 커뮤니티와 소통하세요!">
-    <title>우리 디스코드 서버에 참여하세요!</title>
+    <meta name="description" content="공지사항 페이지">
+    <title>공지사항</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -15,79 +15,116 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: radial-gradient(circle at top, #1e2a78, #0d1123);
+            background: #0d1123;
             color: white;
             text-align: center;
-            overflow: hidden;
         }
         .container {
-            max-width: 900px;
-            padding: 50px;
-            background: rgba(0, 0, 0, 0.85);
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1.5s ease-out;
+            padding: 40px;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
         }
         h1 {
-            font-size: 4em;
-            margin-bottom: 25px;
-            background: -webkit-linear-gradient(45deg, #a0c3ff, #6e8efb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .notice {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .notice img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
         }
         p {
-            font-size: 1.4em;
+            font-size: 1.5em;
             line-height: 1.8;
-            margin-bottom: 40px;
         }
-        .btn, .copy-btn, .notice-btn {
+        .home-btn {
             display: inline-block;
-            padding: 18px 36px;
-            font-size: 1.4em;
-            color: white;
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.2em;
             background: linear-gradient(135deg, #5865f2, #4752c4);
-            border: none;
-            border-radius: 50px;
+            color: white;
             text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .btn:hover, .copy-btn:hover, .notice-btn:hover {
+        .home-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
         }
-        .discord-id {
-            margin-top: 30px;
-            font-size: 1.2em;
+        /* 스포일러 효과 */
+        .spoiler {
+            position: relative;
+            display: inline-block;
         }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+        .spoiler img {
+            filter: blur(5px); /* 흐릿하게 만들기 */
+            cursor: pointer;
+            transition: filter 0.3s;
+        }
+        .spoiler.revealed img {
+            filter: none; /* 스포일러를 풀면 이미지 정상적으로 보이기 */
+        }
+        .spoiler:after {
+            content: '사진을 클릭하여 확인';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>디스코드 커뮤니티에 참여하세요!</h1>
-        <p>지식 공유, 프로젝트 협업, 그리고 다양한 이벤트가 기다리고 있습니다. 지금 바로 참여해 더 나은 커뮤니티를 함께 만들어 봅시다!</p>
-        <a href="https://discord.gg/YOUR_SERVER_INVITE" class="btn" target="_blank">지금 참여하기</a>
-        <a href="notice.html" class="notice-btn" target="_blank">공지사항 보기</a>
-        <div class="discord-id">
-            <p>디스코드 아이디: <strong>master_xxxxxx</strong></p>
-            <button class="copy-btn" onclick="copyToClipboard('master_xxxxxx')">아이디 복사하기</button>
+        <h1>공지사항</h1>
+        <div class="notice">
+            <h2>서버 업데이트 안내</h2>
+            <p>2024년 12월 27일 금요일</p>
+            <img src="image/image1.jpg" alt="업데이트 이미지">
+            <p>서버 안정성 개선 및 새로운 기능이 추가되었습니다. 자세한 사항은 디스코드 채널을 확인해 주세요.</p>
         </div>
+        <div class="notice">
+            <h2>서버 업데이트 안내</h2>
+            <p>2024년 12월 28일 토요일</p>
+            <img src="image/image1.jpg" alt="업데이트 이미지">
+            <p>준비중</p>
+        </div>
+        
+        <!-- 스포일러 게시글 추가 -->
+        <div class="notice">
+            <h2>비밀 업데이트 내용</h2>
+            <p>2024년 12월 29일 일요일</p>
+            <div class="spoiler" onclick="this.classList.toggle('revealed')">
+                <img src="image/image1.jpg" alt="업데이트 이미지">
+            </div>
+            <p>스포일러입니다. 이미지를 클릭하여 확인하세요.</p>
+        </div>
+
+        <a href="index.html" class="home-btn">메인 페이지로 돌아가기</a>
     </div>
 
     <script>
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('디스코드 아이디가 복사되었습니다!');
-            }).catch(err => {
-                alert('복사에 실패했습니다. 다시 시도해 주세요.');
+        // 스포일러 클릭시 이미지 보이게 하기
+        document.querySelectorAll('.spoiler').forEach(function(spoiler) {
+            spoiler.addEventListener('click', function() {
+                this.classList.toggle('revealed');
             });
-        }
+        });
     </script>
 </body>
 </html>
