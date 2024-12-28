@@ -62,19 +62,19 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
         }
         /* 스포일러 효과 */
-        .spoiler {
+        .spoiler-container {
             position: relative;
             display: inline-block;
         }
-        .spoiler img {
+        .spoiler-container img {
             filter: blur(5px); /* 흐릿하게 만들기 */
             cursor: pointer;
             transition: filter 0.3s;
         }
-        .spoiler.revealed img {
+        .spoiler-container.revealed img {
             filter: none; /* 스포일러를 풀면 이미지 정상적으로 보이기 */
         }
-        .spoiler:after {
+        .spoiler-container:after {
             content: '사진을 클릭하여 확인';
             position: absolute;
             top: 50%;
@@ -109,7 +109,7 @@
         <div class="notice">
             <h2>비밀 업데이트 내용</h2>
             <p>2024년 12월 29일 일요일</p>
-            <div class="spoiler" onclick="this.classList.toggle('revealed')">
+            <div class="spoiler-container" onclick="this.classList.toggle('revealed')">
                 <img src="image/image1.jpg" alt="업데이트 이미지">
             </div>
             <p>스포일러입니다. 이미지를 클릭하여 확인하세요.</p>
@@ -120,7 +120,7 @@
 
     <script>
         // 스포일러 클릭시 이미지 보이게 하기
-        document.querySelectorAll('.spoiler').forEach(function(spoiler) {
+        document.querySelectorAll('.spoiler-container').forEach(function(spoiler) {
             spoiler.addEventListener('click', function() {
                 this.classList.toggle('revealed');
             });
