@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="공지사항 페이지">
-    <title>ㄴ공지사항</title>
+    <title>공지사항</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -65,14 +65,14 @@
         .spoiler-container {
             position: relative;
             display: inline-block;
+            cursor: pointer;
         }
         .spoiler-container img {
-            filter: blur(5px); /* 흐릿하게 만들기 */
-            cursor: pointer;
-            transition: filter 0.3s;
+            filter: blur(5px); /* 이미지 흐릿하게 */
+            transition: filter 0.3s ease; /* 부드럽게 변화 */
         }
         .spoiler-container.revealed img {
-            filter: none; /* 스포일러를 풀면 이미지 정상적으로 보이기 */
+            filter: none; /* 클릭 시 정상적으로 보이게 하기 */
         }
         .spoiler-container:after {
             content: '사진을 클릭하여 확인';
@@ -119,7 +119,7 @@
     </div>
 
     <script>
-        // 스포일러 클릭시 이미지 보이게 하기
+        // 스포일러 클릭 시 이미지 보이게 하기
         document.querySelectorAll('.spoiler-container').forEach(function(spoiler) {
             spoiler.addEventListener('click', function() {
                 this.classList.toggle('revealed');
