@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ㄴ설문조사</title>
+    <title>설문조사</title>
     <style>
         body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:auto;margin:0;padding:20px 0}.survey-container{width:80%;max-width:600px;border:1px solid #ccc;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}.survey-container h1{text-align:center}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px}.form-group input,.form-group textarea{width:100%;padding:8px;box-sizing:border-box}.submit-btn{width:100%;padding:12px;background-color:#4CAF50;color:white;border:none;border-radius:5px;font-size:16px;cursor:pointer}.submit-btn:hover{background-color:#45a049}.error-message{color:red;text-align:center;margin-top:20px}
     </style>
@@ -66,16 +66,16 @@
                 });
                 if (n.ok) {
                     localStorage.setItem('lastSubmitTime', (new Date).getTime());
-                    alert('설문이 성공적으로 제출되었습니다!');
+                    document.getElementById('errorMessage').textContent = '설문이 성공적으로 제출되었습니다!';
                     g.target.reset();
                 } else if (n.status === 429) {
-                    alert('전송 속도 제한에 걸렸습니다. 잠시 후 다시 시도해주세요.');
+                    document.getElementById('errorMessage').textContent = '전송 속도 제한에 걸렸습니다. 잠시 후 다시 시도해주세요.';
                 } else {
-                    alert('설문 제출에 실패했습니다.');
+                    document.getElementById('errorMessage').textContent = '설문 제출에 실패했습니다.';
                 }
             } catch (o) {
                 console.error('Error:', o);
-                alert('오류가 발생했습니다. 다시 시도해주세요.');
+                document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
             }
         };
     </script>
