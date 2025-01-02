@@ -18,7 +18,9 @@
             <div class="form-group"><label for="age">나이:</label><input type="number" id="age" name="age" required></div>
             <div class="form-group"><label for="heightWeight">키 / 몸무게 / 젖탱이 크기:</label><input type="text" id="heightWeight" name="heightWeight" required></div>
             <div class="form-group"><label for="frequency">하루 또는 일주일 자위횟수:</label><input type="text" id="frequency" name="frequency" required></div>
-            <div class="form-group"><label for="photo">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label><input type="file" id="photo" name="photo" required></div>
+            <div class="form-group"><label for="photo">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
+                <input type="file" id="photo" name="photo" accept="image/jpeg, image/png" required>
+            </div>
             <div class="form-group"><label for="developPart">개발하고 싶은 부위 (애널, 유두, 클리):</label><input type="text" id="developPart" name="developPart" required></div>
             <div class="form-group"><label for="playPreference">원하는 플레이나 하고 싶은 것 (생활관리, 도그플, 야외노출(야노), 등):</label><textarea id="playPreference" name="playPreference" rows="3" required></textarea></div>
             <div class="form-group"><label for="determination">노예로써 각오:</label><textarea id="determination" name="determination" rows="3" required></textarea></div>
@@ -32,73 +34,27 @@
     </div>
 
     <script>
-        document.getElementById('surveyForm').onsubmit = async function(g){
-            g.preventDefault();
-            const h = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';
-            const formData = new FormData(g.target);
+        document.getElementById('surveyForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const webhookUrl = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';  // 여기에 웹훅 URL을 넣으세요.
 
-            const jsonData = {
-                username: 'Survey Bot',
-                embeds: [
-                    {
-                        title: '설문조사 결과',
-                        fields: []
-                    }
-                ]
-            };
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    body: formData,
+                });
 
-            // Form data를 JSON 형식으로 변환
-            formData.forEach((value, key) => {
-                if (key !== "photo") {
-                    jsonData.embeds[0].fields.push({ name: key, value: value || 'N/A', inline: false });
+                if (response.ok) {
+                    document.getElementById('successMessage').textContent = '설문이 성공적으로 제출되었습니다!';
+                    document.getElementById('surveyForm').reset();
+                } else {
+                    const errorText = await response.text();
+                    document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 상태 코드: ${response.status}. 에러 메시지: ${errorText}`;
                 }
-            });
-
-            // 파일 업로드 처리 (사진)
-            const file = formData.get('photo');
-            if (file) {
-                const fileUploadData = new FormData();
-                fileUploadData.append('file', file);
-
-                try {
-                    // Discord API에서 지원하는 파일 업로드 엔드포인트를 사용해야 합니다.
-                    const uploadResponse = await fetch('파일 업로드 API 엔드포인트 URL', {
-                        method: 'POST',
-                        body: fileUploadData
-                    });
-
-                    if (uploadResponse.ok) {
-                        const uploadedFileData = await uploadResponse.json();
-                        // 업로드된 파일의 URL을 embed에 추가
-                        jsonData.embeds[0].fields.push({
-                            name: '사진',
-                            value: uploadedFileData.url, // 업로드된 파일의 URL
-                            inline: false
-                        });
-
-                        const webhookResponse = await fetch(h, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(jsonData)
-                        });
-
-                        if (webhookResponse.ok) {
-                            g.target.reset();
-                            document.getElementById('successMessage').textContent = '설문이 성공적으로 제출되었습니다!';
-                            document.getElementById('errorMessage').textContent = '';  
-                        } else {
-                            const responseText = await webhookResponse.text();
-                            document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 상태 코드: ${webhookResponse.status}, ${responseText}`;
-                            document.getElementById('successMessage').textContent = '';  
-                        }
-                    } else {
-                        document.getElementById('errorMessage').textContent = '사진 업로드에 실패했습니다.';
-                        document.getElementById('successMessage').textContent = '';  
-                    }
-                } catch (error) {
-                    document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
-                    document.getElementById('successMessage').textContent = '';  
-                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
             }
         };
     </script>
