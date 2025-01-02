@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ㄴ설문조사</title>
+    <title>설문조사</title>
     <style>
         body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:auto;margin:0;padding:20px 0}.survey-container{width:80%;max-width:600px;border:1px solid #ccc;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}.survey-container h1{text-align:center}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px}.form-group input,.form-group textarea{width:100%;padding:8px;box-sizing:border-box}.submit-btn{width:100%;padding:12px;background-color:#4CAF50;color:white;border:none;border-radius:5px;font-size:16px;cursor:pointer}.submit-btn:hover{background-color:#45a049}.error-message{color:red;text-align:center;margin-top:20px}.success-message{color:green;text-align:center;margin-top:20px}
     </style>
@@ -11,7 +11,7 @@
 <body>
     <div class="survey-container">
         <h1>설문조사</h1>
-        <form id="surveyForm">
+        <form id="surveyForm" enctype="multipart/form-data">
             <div class="form-group"><label for="nickname">닉네임:</label><input type="text" id="nickname" name="nickname" required></div>
             <div class="form-group"><label for="discordId">디스코드 아이디:</label><input type="text" id="discordId" name="discordId" required></div>
             <div class="form-group"><label for="name">이름(본명):</label><input type="text" id="name" name="name" required></div>
@@ -35,43 +35,70 @@
         document.getElementById('surveyForm').onsubmit = async function(g){
             g.preventDefault();
             const h = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';
-            const i = new FormData(g.target);
-            const j = [];
-            i.forEach((k, l) => {
-                j.push({name: l, value: k || 'N/A', inline: false});
-            });
-            const m = {
+            const formData = new FormData(g.target);
+
+            const jsonData = {
                 username: 'Survey Bot',
                 embeds: [
                     {
                         title: '설문조사 결과',
-                        fields: j,
-                        color: 3447003,
-                        timestamp: new Date
+                        fields: []
                     }
                 ]
             };
 
-            try {
-                const n = await fetch(h, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(m)
-                });
+            // Form data를 JSON 형식으로 변환
+            formData.forEach((value, key) => {
+                if (key !== "photo") {
+                    jsonData.embeds[0].fields.push({ name: key, value: value || 'N/A', inline: false });
+                }
+            });
 
-                if (n.ok) {
-                    g.target.reset();
-                    document.getElementById('successMessage').textContent = '설문이 성공적으로 제출되었습니다!';
-                    document.getElementById('errorMessage').textContent = '';  
-                } else {
-                    const responseText = await n.text();
-                    document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 상태 코드: ${n.status}, ${responseText}`;
+            // 파일 업로드 처리 (사진)
+            const file = formData.get('photo');
+            if (file) {
+                const fileUploadData = new FormData();
+                fileUploadData.append('file', file);
+
+                try {
+                    // Discord API에서 지원하는 파일 업로드 엔드포인트를 사용해야 합니다.
+                    const uploadResponse = await fetch('파일 업로드 API 엔드포인트 URL', {
+                        method: 'POST',
+                        body: fileUploadData
+                    });
+
+                    if (uploadResponse.ok) {
+                        const uploadedFileData = await uploadResponse.json();
+                        // 업로드된 파일의 URL을 embed에 추가
+                        jsonData.embeds[0].fields.push({
+                            name: '사진',
+                            value: uploadedFileData.url, // 업로드된 파일의 URL
+                            inline: false
+                        });
+
+                        const webhookResponse = await fetch(h, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(jsonData)
+                        });
+
+                        if (webhookResponse.ok) {
+                            g.target.reset();
+                            document.getElementById('successMessage').textContent = '설문이 성공적으로 제출되었습니다!';
+                            document.getElementById('errorMessage').textContent = '';  
+                        } else {
+                            const responseText = await webhookResponse.text();
+                            document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 상태 코드: ${webhookResponse.status}, ${responseText}`;
+                            document.getElementById('successMessage').textContent = '';  
+                        }
+                    } else {
+                        document.getElementById('errorMessage').textContent = '사진 업로드에 실패했습니다.';
+                        document.getElementById('successMessage').textContent = '';  
+                    }
+                } catch (error) {
+                    document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
                     document.getElementById('successMessage').textContent = '';  
                 }
-            } catch (o) {
-                console.error('Error:', o);
-                document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
-                document.getElementById('successMessage').textContent = '';  
             }
         };
     </script>
