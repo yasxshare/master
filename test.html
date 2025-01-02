@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ㄴ설문조사</title>
     <style>
-        body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:auto;margin:0;padding:20px 0}.survey-container{width:80%;max-width:600px;border:1px solid #ccc;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}.survey-container h1{text-align:center}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px}.form-group input,.form-group textarea{width:100%;padding:8px;box-sizing:border-box}.submit-btn{width:100%;padding:12px;background-color:#4CAF50;color:white;border:none;border-radius:5px;font-size:16px;cursor:pointer}.submit-btn:hover{background-color:#45a049}.error-message{color:red;text-align:center;margin-top:20px}
+        body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:auto;margin:0;padding:20px 0}
+        .survey-container{width:80%;max-width:600px;border:1px solid #ccc;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}
+        .survey-container h1{text-align:center}
+        .form-group{margin-bottom:20px}
+        .form-group label{display:block;margin-bottom:8px}
+        .form-group input,.form-group textarea{width:100%;padding:8px;box-sizing:border-box}
+        .submit-btn{width:100%;padding:12px;background-color:#4CAF50;color:white;border:none;border-radius:5px;font-size:16px;cursor:pointer}
+        .submit-btn:hover{background-color:#45a049}
+        .error-message{color:red;text-align:center;margin-top:20px}
     </style>
 </head>
 <body>
@@ -31,6 +39,26 @@
     </div>
 
     <script>
-        const a=localStorage.getItem('lastSubmitTime'),b=(new Date).getTime(),c=3600000;if(a&&(b-a<c)){document.querySelector('.submit-btn').disabled=!0;const d=(c-(b-a))/1000,e=Math.floor(d/60),f=Math.floor(d%60);document.getElementById('errorMessage').textContent=`다음 제출은 ${e}분 ${f}초 후에 가능합니다.`}document.getElementById('surveyForm').onsubmit=async function(g){g.preventDefault();if(a&&(b-a<c)){const d=(c-(b-a))/1000,e=Math.floor(d/60),f=Math.floor(d%60);document.getElementById('errorMessage').textContent=`다음 제출은 ${e}분 ${f}초 후에 가능합니다.`;return}const h='https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY',i=new FormData(g.target),j=[];i.forEach((k,l)=>{j.push({name:l,value:k||'N/A',inline:!1})});const m={username:'Survey Bot',embeds:[{title:'설문조사 결과',fields:j,color:3447003,timestamp:new Date}]}try{const n=await fetch(h,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(m)});if(n.ok){localStorage.setItem('lastSubmitTime',(new Date).getTime()),alert('설문이 성공적으로 제출되었습니다!'),g.target.reset()}else if(n.status===429){alert('전송 속도 제한에 걸렸습니다. 잠시 후 다시 시도해주세요.')}else alert('설문 제출에 실패했습니다.')}catch(o){console.error('Error:',o),alert('오류가 발생했습니다. 다시 시도해주세요.')}};</script>
+        const lS=localStorage.getItem('lastSubmitTime'),cT=(new Date).getTime(),iT=3600000;
+        if(lS&&(cT-lS<iT)){document.querySelector('.submit-btn').disabled=!0;const rT=(iT-(cT-lS))/1000,min=Math.floor(rT/60),sec=Math.floor(rT%60);document.getElementById('errorMessage').textContent=`다음 제출은 ${min}분 ${sec}초 후에 가능합니다.`}
+        document.getElementById('surveyForm').onsubmit=async function(e){
+            e.preventDefault();
+            if(lS&&(cT-lS<iT)){
+                const rT=(iT-(cT-lS))/1000,min=Math.floor(rT/60),sec=Math.floor(rT%60);
+                document.getElementById('errorMessage').textContent=`다음 제출은 ${min}분 ${sec}초 후에 가능합니다.`;
+                return;
+            }
+            const wUrl='https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY',
+                  fData=new FormData(e.target),fields=[];
+            fData.forEach((v,k)=>{fields.push({name:k,value:v||'N/A',inline:false})});
+            const data={username:'Survey Bot',embeds:[{title:'설문조사 결과',fields:fields,color:3447003,timestamp:new Date}]};
+            try{
+                const resp=await fetch(wUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+                if(resp.ok){localStorage.setItem('lastSubmitTime',(new Date).getTime()),alert('설문이 성공적으로 제출되었습니다!'),e.target.reset();}
+                else if(resp.status===429){alert('전송 속도 제한에 걸렸습니다. 잠시 후 다시 시도해주세요.');}
+                else alert('설문 제출에 실패했습니다.');
+            }catch(err){console.error('Error:',err),alert('오류가 발생했습니다. 다시 시도해주세요.');}
+        };
+    </script>
 </body>
 </html>
