@@ -56,7 +56,7 @@
         <h1>설문조사</h1>
         <form id="surveyForm">
             <div class="form-group">
-                <label for="name">이름:</label>
+                <label for="name">이름(본명):</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
@@ -64,8 +64,40 @@
                 <input type="number" id="age" name="age" required>
             </div>
             <div class="form-group">
-                <label for="opinion">의견:</label>
-                <textarea id="opinion" name="opinion" rows="4" required></textarea>
+                <label for="heightWeight">키 / 몸무게:</label>
+                <input type="text" id="heightWeight" name="heightWeight" required>
+            </div>
+            <div class="form-group">
+                <label for="frequency">하루 또는 일주일 자위 횟수:</label>
+                <input type="text" id="frequency" name="frequency" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">사진 (선택사항):</label>
+                <input type="file" id="photo" name="photo">
+            </div>
+            <div class="form-group">
+                <label for="developPart">개발하고 싶은 부위:</label>
+                <input type="text" id="developPart" name="developPart" required>
+            </div>
+            <div class="form-group">
+                <label for="playPreference">원하는 플레이나 하고 싶은 것:</label>
+                <textarea id="playPreference" name="playPreference" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="determination">노예로써 각오:</label>
+                <textarea id="determination" name="determination" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="phone">전번:</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="location">사는 곳:</label>
+                <input type="text" id="location" name="location">
+            </div>
+            <div class="form-group">
+                <label for="instagram">인스타:</label>
+                <input type="text" id="instagram" name="instagram">
             </div>
             <button type="submit" class="submit-btn">제출</button>
         </form>
@@ -74,7 +106,7 @@
     <script>
         document.getElementById('surveyForm').onsubmit = async function(event) {
             event.preventDefault();
-            const webhookUrl = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';
+            const webhookUrl = 'https://discord.com/api/webhooks/YOUR_WEBHOOK_URL';
             
             const formData = new FormData(event.target);
             const data = {
@@ -82,11 +114,7 @@
                 embeds: [
                     {
                         title: '설문조사 결과',
-                        fields: [
-                            { name: '이름', value: formData.get('name'), inline: true },
-                            { name: '나이', value: formData.get('age'), inline: true },
-                            { name: '의견', value: formData.get('opinion') }
-                        ],
+                        fields: Array.from(formData.entries()).map(([key, value]) => ({ name: key, value: value || 'N/A' })),
                         color: 3447003
                     }
                 ]
@@ -111,4 +139,4 @@
         };
     </script>
 </body>
-</html> 
+</html>
