@@ -37,6 +37,7 @@
             const d = (c - (b - a)) / 1000, e = Math.floor(d / 60), f = Math.floor(d % 60);
             document.getElementById('errorMessage').textContent = `다음 제출은 ${e}분 ${f}초 후에 가능합니다.`;
         }
+
         document.getElementById('surveyForm').onsubmit = async function(g) {
             g.preventDefault();
             if (a && (b - a < c)) {
@@ -44,6 +45,7 @@
                 document.getElementById('errorMessage').textContent = `다음 제출은 ${e}분 ${f}초 후에 가능합니다.`;
                 return;
             }
+
             const h = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY',
                 i = new FormData(g.target), j = [];
             i.forEach((k, l) => {
@@ -58,23 +60,30 @@
                     timestamp: new Date
                 }]
             };
+
             try {
                 const n = await fetch(h, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(m)
                 });
+
                 if (n.ok) {
                     localStorage.setItem('lastSubmitTime', (new Date).getTime());
+                    document.getElementById('errorMessage').style.color = 'green';
                     document.getElementById('errorMessage').textContent = '설문이 성공적으로 제출되었습니다!';
                     g.target.reset();
                 } else if (n.status === 429) {
+                    document.getElementById('errorMessage').style.color = 'red';
                     document.getElementById('errorMessage').textContent = '전송 속도 제한에 걸렸습니다. 잠시 후 다시 시도해주세요.';
                 } else {
-                    document.getElementById('errorMessage').textContent = '설문 제출에 실패했습니다.';
+                    const errorText = await n.text();
+                    document.getElementById('errorMessage').style.color = 'red';
+                    document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 상태 코드: ${n.status}, 오류 내용: ${errorText}`;
                 }
             } catch (o) {
                 console.error('Error:', o);
+                document.getElementById('errorMessage').style.color = 'red';
                 document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
             }
         };
