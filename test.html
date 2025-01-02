@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>설문조사</title>
+    <title>ㄴ설문조사</title>
     <style>
         body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:auto;margin:0;padding:20px 0}.survey-container{width:80%;max-width:600px;border:1px solid #ccc;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}.survey-container h1{text-align:center}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px}.form-group input,.form-group textarea{width:100%;padding:8px;box-sizing:border-box}.submit-btn{width:100%;padding:12px;background-color:#4CAF50;color:white;border:none;border-radius:5px;font-size:16px;cursor:pointer}.submit-btn:hover{background-color:#45a049}.error-message{color:red;text-align:center;margin-top:20px}.success-message{color:green;text-align:center;margin-top:20px}
     </style>
@@ -62,16 +62,16 @@
                 if (n.ok) {
                     g.target.reset();
                     document.getElementById('successMessage').textContent = '설문이 성공적으로 제출되었습니다!';
-                    document.getElementById('errorMessage').textContent = '';  // 성공 시 오류 메시지 제거
+                    document.getElementById('errorMessage').textContent = '';  
                 } else {
                     const responseText = await n.text();
                     document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 상태 코드: ${n.status}, ${responseText}`;
-                    document.getElementById('successMessage').textContent = '';  // 실패 시 성공 메시지 제거
+                    document.getElementById('successMessage').textContent = '';  
                 }
             } catch (o) {
                 console.error('Error:', o);
                 document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
-                document.getElementById('successMessage').textContent = '';  // 오류 시 성공 메시지 제거
+                document.getElementById('successMessage').textContent = '';  
             }
         };
     </script>
