@@ -3,113 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="공지사항 페이지">
-    <title>ㄴ공지사항</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>설문조사</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            background: #0d1123;
-            color: white;
-            text-align: center;
-            overflow-y: scroll;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .container {
-            padding: 40px;
-            max-width: 800px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-            width: 100%;
-        }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            position: sticky;
-            top: 20px;
-            z-index: 10;
-            background: #0d1123;
-            padding: 10px 0;
-        }
-        .notice {
-            margin: 30px 0;
+        .survey-container {
+            width: 80%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .notice img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-top: 20px;
+        .survey-container h1 {
+            text-align: center;
         }
-        p {
-            font-size: 1.5em;
-            line-height: 1.8;
+        .form-group {
+            margin-bottom: 20px;
         }
-        .home-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background: linear-gradient(135deg, #5865f2, #4752c4);
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
             color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        .home-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        .submit-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>공지사항</h1>
-        <div class="notice">
-            <h2>서버 업데이트 안내</h2>
-            <p>2024년 12월 27일 금요일</p>
-            <img src="image/image1.jpg" alt="업데이트 이미지">
-            <p>서버 안정성 개선 및 새로운 기능이 추가되었습니다. 자세한 사항은 디스코드 채널을 확인해 주세요.</p>
-        </div>
-        <div class="notice">
-            <h2>서버 업데이트 안내</h2>
-            <p>2024년 12월 28일 토요일</p>
-            <img src="image/image1.jpg" alt="업데이트 이미지">
-            <p>준비중</p>
-        </div>
-        <div class="notice">
-            <h2>서버 업데이트 안내</h2>
-            <p>2024년 12월 29일 일요일</p>
-            <img src="image/image1.jpg" alt="업데이트 이미지">
-            <p>준비중</p>
-        </div>
-        <div class="notice">
-            <h2>서버 업데이트 안내</h2>
-            <p>2024년 12월 30일 월요일</p>
-            <img src="image/image1.jpg" alt="업데이트 이미지">
-            <p>준비중</p>
-        </div>
-        <div class="notice">
-            <h2>서버 업데이트 안내</h2>
-            <p>2024년 12월 31일 화요일</p>
-            <img src="image/image1.jpg" alt="업데이트 이미지">
-            <p>준비중</p>
-        </div>
-        <div class="notice">
-            <h2>서버 업데이트 안내</h2>
-            <p>2025년 1월 1일 수요일</p>
-            <img src="image/image1.jpg" alt="업데이트 이미지">
-            <p>준비중</p>
-        </div>
-        <a href="index.html" class="home-btn">메인 페이지로 돌아가기</a>
+    <div class="survey-container">
+        <h1>설문조사</h1>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="name">이름:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">나이:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="opinion">의견:</label>
+                <textarea id="opinion" name="opinion" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">제출</button>
+        </form>
     </div>
+
+    <script>
+        document.getElementById('surveyForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const webhookUrl = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';
+            
+            const formData = new FormData(event.target);
+            const data = {
+                username: 'Survey Bot',
+                embeds: [
+                    {
+                        title: '설문조사 결과',
+                        fields: [
+                            { name: '이름', value: formData.get('name'), inline: true },
+                            { name: '나이', value: formData.get('age'), inline: true },
+                            { name: '의견', value: formData.get('opinion') }
+                        ],
+                        color: 3447003
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    alert('설문이 성공적으로 제출되었습니다!');
+                    event.target.reset();
+                } else {
+                    alert('설문 제출에 실패했습니다.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('오류가 발생했습니다. 다시 시도해주세요.');
+            }
+        };
+    </script>
 </body>
-</html>
+</html> 
