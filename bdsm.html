@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDSM 파트너 신청 설문조사</title>
+  <title>ㄴBDSM 파트너 신청 설문조사</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -123,11 +123,10 @@
       })
       .then(response => response.json())
       .then(data => {
-        alert('설문조사 결과가 제출되었습니다.');
         document.getElementById('survey-form').reset();
       })
       .catch(error => {
-        alert('오류가 발생했습니다. 다시 시도해주세요.');
+        console.error('오류 발생:', error);
       });
     });
   </script>
