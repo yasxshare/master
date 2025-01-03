@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ㄴBDSM 파트너 신청 설문조사</title>
+  <title>BDSM 파트너 신청 설문조사</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -52,6 +52,12 @@
     }
     .submit-btn:hover {
       background-color: #0056b3;
+    }
+    .success-message {
+      color: green;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -115,6 +121,7 @@
       </div>
 
       <button type="submit" class="submit-btn">제출</button>
+      <div id="success-message" class="success-message" style="display: none;">전송되었습니다.</div>
     </form>
   </div>
 
@@ -148,6 +155,7 @@
       .then(response => response.json())
       .then(data => {
         document.getElementById('survey-form').reset();
+        document.getElementById('success-message').style.display = 'block';
       })
       .catch(error => {
         console.error('오류 발생:', error);
