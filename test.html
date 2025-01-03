@@ -156,6 +156,9 @@
       .then(data => {
         document.getElementById('survey-form').reset();
         document.getElementById('success-message').style.display = 'block';
+        setTimeout(function() {
+          document.getElementById('success-message').style.display = 'none';
+        }, 5000);  // 5초 후에 메시지를 숨깁니다
       })
       .catch(error => {
         console.error('오류 발생:', error);
