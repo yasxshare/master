@@ -1,177 +1,189 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>설문조사</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 20px 0;
-            background-color: #f4f4f9;
-        }
-        .survey-container {
-            width: 80%;
-            max-width: 600px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-        .survey-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .form-group input[type="file"] {
-            padding: 3px;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        .error-message {
-            color: red;
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDSM 파트너 신청 설문조사</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      width: 50%;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .form-group textarea {
+      resize: vertical;
+    }
+    .submit-btn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <div class="survey-container">
-        <h1>설문조사</h1>
-        <form id="surveyForm">
-            <div class="form-group">
-                <label for="name">이름(본명):</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="age">나이:</label>
-                <input type="number" id="age" name="age" required>
-            </div>
-            <div class="form-group">
-                <label for="heightWeight">키 / 몸무게 / 젖탱이 크기:</label>
-                <input type="text" id="heightWeight" name="heightWeight" required>
-            </div>
-            <div class="form-group">
-                <label for="frequency">하루 또는 일주일 자위횟수:</label>
-                <input type="text" id="frequency" name="frequency" required>
-            </div>
-            <div class="form-group">
-                <label for="photo">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
-                <input type="file" id="photo" name="photo" accept="image/*" required>
-            </div>
-            <div class="form-group">
-                <label for="developPart">개발하고 싶은 부위 (애널, 유두, 클리):</label>
-                <input type="text" id="developPart" name="developPart" required>
-            </div>
-            <div class="form-group">
-                <label for="playPreference">원하는 플레이나 하고 싶은 것:</label>
-                <textarea id="playPreference" name="playPreference" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="determination">노예로써 각오:</label>
-                <textarea id="determination" name="determination" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="phone">전번 (하드):</label>
-                <input type="text" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-                <label for="location">사는 곳 (하드):</label>
-                <input type="text" id="location" name="location">
-            </div>
-            <div class="form-group">
-                <label for="instagram">인스타 (하드):</label>
-                <input type="text" id="instagram" name="instagram">
-            </div>
-            <button type="submit" class="submit-btn">제출</button>
-            <div class="error-message" id="errorMessage"></div>
-        </form>
-    </div>
+  <div class="container">
+    <h1>BDSM 파트너 신청 설문조사</h1>
+    <form id="survey-form">
+      <div class="form-group">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
 
-    <script>
-        document.getElementById('surveyForm').onsubmit = async function(event) {
-            event.preventDefault();
+      <div class="form-group">
+        <label for="gender">성별:</label>
+        <select id="gender" name="gender" required>
+          <option value="male">남성</option>
+          <option value="female">여성</option>
+          <option value="other">기타</option>
+        </select>
+      </div>
 
-            const webhookUrl = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY'; // 웹훅 URL을 여기에 입력하세요.
+      <div class="form-group">
+        <label for="preferences">선호하는 역할:</label>
+        <select id="preferences" name="preferences" required>
+          <option value="dominant">지배적</option>
+          <option value="submissive">복종적</option>
+          <option value="switch">양쪽 모두</option>
+        </select>
+      </div>
 
-            const formData = new FormData(event.target);
-            const embedFields = [];
+      <div class="form-group">
+        <label for="experience">경험 수준:</label>
+        <select id="experience" name="experience" required>
+          <option value="beginner">초보</option>
+          <option value="intermediate">중급</option>
+          <option value="advanced">고급</option>
+        </select>
+      </div>
 
-            formData.forEach((value, key) => {
-                // 사진 파일 처리 (URL로 변환 후 웹훅 메시지로 전송)
-                if (key === 'photo') {
-                    const photoUrl = await uploadPhoto(value);
-                    embedFields.push({ name: '사진', value: `[이미지 보기](${photoUrl})`, inline: false });
-                } else {
-                    embedFields.push({ name: key, value: value || 'N/A', inline: false });
-                }
-            });
+      <div class="form-group">
+        <label for="age">나이:</label>
+        <input type="number" id="age" name="age" required>
+      </div>
 
-            const data = {
-                username: 'Survey Bot',
-                embeds: [
-                    {
-                        title: '설문조사 결과',
-                        fields: embedFields,
-                        color: 3447003,
-                        timestamp: new Date()
-                    }
-                ]
-            };
+      <div class="form-group">
+        <label for="location">지역:</label>
+        <input type="text" id="location" name="location" required>
+      </div>
 
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+      <div class="form-group">
+        <label for="sexual_orientation">성적 지향:</label>
+        <select id="sexual_orientation" name="sexual_orientation" required>
+          <option value="heterosexual">이성애자</option>
+          <option value="homosexual">동성애자</option>
+          <option value="bisexual">양성애자</option>
+          <option value="other">기타</option>
+        </select>
+      </div>
 
-                if (response.ok) {
-                    document.getElementById('errorMessage').textContent = '설문이 성공적으로 제출되었습니다!';
-                    event.target.reset();
-                } else {
-                    document.getElementById('errorMessage').textContent = '설문 제출에 실패했습니다.';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
-            }
-        };
+      <div class="form-group">
+        <label for="safety">안전 장치에 대한 관심:</label>
+        <select id="safety" name="safety" required>
+          <option value="high">높음</option>
+          <option value="medium">보통</option>
+          <option value="low">낮음</option>
+        </select>
+      </div>
 
-        async function uploadPhoto(file) {
-            // 실제 파일을 업로드하는 로직이 필요합니다. 
-            // 여기서는 가상으로 사진 URL을 반환합니다.
-            // 예시로, 실제 업로드 API로 변경해야 합니다.
-            return 'https://your-uploaded-photo-url.com/photo.jpg';
-        }
-    </script>
+      <div class="form-group">
+        <label for="communication">커뮤니케이션 스타일:</label>
+        <select id="communication" name="communication" required>
+          <option value="clear">명확함</option>
+          <option value="vague">모호함</option>
+          <option value="open">열린</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="expectations">기대하는 사항:</label>
+        <textarea id="expectations" name="expectations" rows="4" placeholder="파트너에게 기대하는 바를 적어주세요." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="limits">한계에 대한 선호:</label>
+        <textarea id="limits" name="limits" rows="4" placeholder="한계가 될 수 있는 사항을 적어주세요." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="comments">기타 요청사항:</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="기타 요청사항이나 주의사항을 입력해주세요."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">제출</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('survey-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById('name').value,
+        gender: document.getElementById('gender').value,
+        preferences: document.getElementById('preferences').value,
+        experience: document.getElementById('experience').value,
+        age: document.getElementById('age').value,
+        location: document.getElementById('location').value,
+        sexual_orientation: document.getElementById('sexual_orientation').value,
+        safety: document.getElementById('safety').value,
+        communication: document.getElementById('communication').value,
+        expectations: document.getElementById('expectations').value,
+        limits: document.getElementById('limits').value,
+        comments: document.getElementById('comments').value
+      };
+
+      fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          content: `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${data.name}\n성별: ${data.gender}\n선호하는 역할: ${data.preferences}\n경험 수준: ${data.experience}\n나이: ${data.age}\n지역: ${data.location}\n성적 지향: ${data.sexual_orientation}\n안전 장치: ${data.safety}\n커뮤니케이션 스타일: ${data.communication}\n기대 사항: ${data.expectations}\n한계: ${data.limits}\n기타 사항: ${data.comments}`
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('survey-form').reset();
+      })
+      .catch(error => {
+        console.error('오류 발생:', error);
+      });
+    });
+  </script>
 </body>
 </html>
