@@ -60,35 +60,8 @@
     <h1>BDSM 파트너 신청 설문조사</h1>
     <form id="survey-form">
       <div class="form-group">
-        <label for="name">이름:</label>
+        <label for="name">이름(본명):</label>
         <input type="text" id="name" name="name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="gender">성별:</label>
-        <select id="gender" name="gender" required>
-          <option value="male">남성</option>
-          <option value="female">여성</option>
-          <option value="other">기타</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="preferences">선호하는 역할:</label>
-        <select id="preferences" name="preferences" required>
-          <option value="dominant">지배적</option>
-          <option value="submissive">복종적</option>
-          <option value="switch">양쪽 모두</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="experience">경험 수준:</label>
-        <select id="experience" name="experience" required>
-          <option value="beginner">초보</option>
-          <option value="intermediate">중급</option>
-          <option value="advanced">고급</option>
-        </select>
       </div>
 
       <div class="form-group">
@@ -97,51 +70,48 @@
       </div>
 
       <div class="form-group">
-        <label for="location">지역:</label>
+        <label for="body">키/몸무게/젖탱이 크기:</label>
+        <input type="text" id="body" name="body" required>
+      </div>
+
+      <div class="form-group">
+        <label for="masturbation">하루 또는 일주일 자위횟수:</label>
+        <input type="text" id="masturbation" name="masturbation" required>
+      </div>
+
+      <div class="form-group">
+        <label for="photos">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
+        <textarea id="photos" name="photos" rows="4" placeholder="보지, 가슴, 민증, 암캐 인증 자세 등"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="body_parts">개발하고 싶은 부위:</label>
+        <input type="text" id="body_parts" name="body_parts" required placeholder="애널, 유두, 클리">
+      </div>
+
+      <div class="form-group">
+        <label for="play">원하는 플레이나 하고 싶은 것:</label>
+        <input type="text" id="play" name="play" required placeholder="생활관리, 도그플, 야외노출(야노), 등">
+      </div>
+
+      <div class="form-group">
+        <label for="submission">노예로써 각오:</label>
+        <textarea id="submission" name="submission" rows="4" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">전번:</label>
+        <input type="text" id="phone" name="phone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="location">사는 곳:</label>
         <input type="text" id="location" name="location" required>
       </div>
 
       <div class="form-group">
-        <label for="sexual_orientation">성적 지향:</label>
-        <select id="sexual_orientation" name="sexual_orientation" required>
-          <option value="heterosexual">이성애자</option>
-          <option value="homosexual">동성애자</option>
-          <option value="bisexual">양성애자</option>
-          <option value="other">기타</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="safety">안전 장치에 대한 관심:</label>
-        <select id="safety" name="safety" required>
-          <option value="high">높음</option>
-          <option value="medium">보통</option>
-          <option value="low">낮음</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="communication">커뮤니케이션 스타일:</label>
-        <select id="communication" name="communication" required>
-          <option value="clear">명확함</option>
-          <option value="vague">모호함</option>
-          <option value="open">열린</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="expectations">기대하는 사항:</label>
-        <textarea id="expectations" name="expectations" rows="4" placeholder="파트너에게 기대하는 바를 적어주세요." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="limits">한계에 대한 선호:</label>
-        <textarea id="limits" name="limits" rows="4" placeholder="한계가 될 수 있는 사항을 적어주세요." required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="comments">기타 요청사항:</label>
-        <textarea id="comments" name="comments" rows="4" placeholder="기타 요청사항이나 주의사항을 입력해주세요."></textarea>
+        <label for="instagram">인스타:</label>
+        <input type="text" id="instagram" name="instagram" required>
       </div>
 
       <button type="submit" class="submit-btn">제출</button>
@@ -154,17 +124,16 @@
 
       const data = {
         name: document.getElementById('name').value,
-        gender: document.getElementById('gender').value,
-        preferences: document.getElementById('preferences').value,
-        experience: document.getElementById('experience').value,
         age: document.getElementById('age').value,
+        body: document.getElementById('body').value,
+        masturbation: document.getElementById('masturbation').value,
+        photos: document.getElementById('photos').value,
+        body_parts: document.getElementById('body_parts').value,
+        play: document.getElementById('play').value,
+        submission: document.getElementById('submission').value,
+        phone: document.getElementById('phone').value,
         location: document.getElementById('location').value,
-        sexual_orientation: document.getElementById('sexual_orientation').value,
-        safety: document.getElementById('safety').value,
-        communication: document.getElementById('communication').value,
-        expectations: document.getElementById('expectations').value,
-        limits: document.getElementById('limits').value,
-        comments: document.getElementById('comments').value
+        instagram: document.getElementById('instagram').value
       };
 
       fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
@@ -173,7 +142,7 @@
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          content: `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${data.name}\n성별: ${data.gender}\n선호하는 역할: ${data.preferences}\n경험 수준: ${data.experience}\n나이: ${data.age}\n지역: ${data.location}\n성적 지향: ${data.sexual_orientation}\n안전 장치: ${data.safety}\n커뮤니케이션 스타일: ${data.communication}\n기대 사항: ${data.expectations}\n한계: ${data.limits}\n기타 사항: ${data.comments}`
+          content: `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${data.name}\n나이: ${data.age}\n키/몸무게/젖탱이 크기: ${data.body}\n하루 또는 일주일 자위횟수: ${data.masturbation}\n사진: ${data.photos}\n개발하고 싶은 부위: ${data.body_parts}\n원하는 플레이: ${data.play}\n노예로써 각오: ${data.submission}\n전번: ${data.phone}\n사는 곳: ${data.location}\n인스타: ${data.instagram}`
         })
       })
       .then(response => response.json())
