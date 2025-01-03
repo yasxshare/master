@@ -5,124 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>설문조사</title>
     <style>
-        body{font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:auto;margin:0;padding:20px 0}.survey-container{width:80%;max-width:600px;border:1px solid #ccc;border-radius:10px;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}.survey-container h1{text-align:center}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:8px}.form-group input,.form-group textarea{width:100%;padding:8px;box-sizing:border-box}.submit-btn{width:100%;padding:12px;background-color:#4CAF50;color:white;border:none;border-radius:5px;font-size:16px;cursor:pointer}.submit-btn:hover{background-color:#45a049}.error-message{color:red;text-align:center;margin-top:20px}.success-message{color:green;text-align:center;margin-top:20px}
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            margin: 0;
+            padding: 20px 0;
+        }
+        .survey-container {
+            width: 80%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .survey-container h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="survey-container">
         <h1>설문조사</h1>
-        <form id="surveyForm" enctype="multipart/form-data">
-            <div class="form-group"><label for="nickname">닉네임:</label><input type="text" id="nickname" name="nickname" required></div>
-            <div class="form-group"><label for="discordId">디스코드 아이디:</label><input type="text" id="discordId" name="discordId" required></div>
-            <div class="form-group"><label for="name">이름(본명):</label><input type="text" id="name" name="name" required></div>
-            <div class="form-group"><label for="age">나이:</label><input type="number" id="age" name="age" required></div>
-            <div class="form-group"><label for="heightWeight">키 / 몸무게 / 젖탱이 크기:</label><input type="text" id="heightWeight" name="heightWeight" required></div>
-            <div class="form-group"><label for="frequency">하루 또는 일주일 자위횟수:</label><input type="text" id="frequency" name="frequency" required></div>
-            <div class="form-group"><label for="photo">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
-                <input type="file" id="photo" name="photo" accept="image/jpeg, image/png" required>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label for="nickname">닉네임:</label>
+                <input type="text" id="nickname" name="nickname" required>
             </div>
-            <div class="form-group"><label for="developPart">개발하고 싶은 부위 (애널, 유두, 클리):</label><input type="text" id="developPart" name="developPart" required></div>
-            <div class="form-group"><label for="playPreference">원하는 플레이나 하고 싶은 것 (생활관리, 도그플, 야외노출(야노), 등):</label><textarea id="playPreference" name="playPreference" rows="3" required></textarea></div>
-            <div class="form-group"><label for="determination">노예로써 각오:</label><textarea id="determination" name="determination" rows="3" required></textarea></div>
-            <div class="form-group"><label for="phone">전번 (하드):</label><input type="text" id="phone" name="phone"></div>
-            <div class="form-group"><label for="location">사는 곳 (하드):</label><input type="text" id="location" name="location"></div>
-            <div class="form-group"><label for="instagram">인스타 (하드):</label><input type="text" id="instagram" name="instagram"></div>
+            <div class="form-group">
+                <label for="discordId">디스코드 아이디:</label>
+                <input type="text" id="discordId" name="discordId" required>
+            </div>
+            <div class="form-group">
+                <label for="name">이름(본명):</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">나이:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="heightWeight">키 / 몸무게 / 젖탱이 크기:</label>
+                <input type="text" id="heightWeight" name="heightWeight" required>
+            </div>
+            <div class="form-group">
+                <label for="frequency">하루 또는 일주일 자위횟수:</label>
+                <input type="text" id="frequency" name="frequency" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
+                <textarea id="photo" name="photo" rows="3" placeholder="보지, 가슴, 민증, 암캐 인증 자세 등" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="developPart">개발하고 싶은 부위 (애널, 유두, 클리):</label>
+                <input type="text" id="developPart" name="developPart" required>
+            </div>
+            <div class="form-group">
+                <label for="playPreference">원하는 플레이나 하고 싶은 것 (생활관리, 도그플, 야외노출(야노), 등):</label>
+                <textarea id="playPreference" name="playPreference" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="determination">노예로써 각오:</label>
+                <textarea id="determination" name="determination" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="phone">전번 (하드):</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="location">사는 곳 (하드):</label>
+                <input type="text" id="location" name="location">
+            </div>
+            <div class="form-group">
+                <label for="instagram">인스타 (하드):</label>
+                <input type="text" id="instagram" name="instagram">
+            </div>
             <button type="submit" class="submit-btn">제출</button>
             <div class="error-message" id="errorMessage"></div>
-            <div class="success-message" id="successMessage"></div>
         </form>
     </div>
 
     <script>
-    document.getElementById('surveyForm').onsubmit = async function(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const webhookUrl = 'https://discord.com/api/webhooks/xxxx/yyyyy';  // 웹훅 URL 입력
+        const lastSubmitTime = localStorage.getItem('lastSubmitTime');
+        const currentTime = new Date().getTime();
+        const oneHourInMs = 3600000;
 
-        const fileInput = document.getElementById('photo');
-        const file = fileInput.files[0];
-
-        if (!file) {
-            alert("사진을 선택해 주세요.");
-            return;
+        if (lastSubmitTime && (currentTime - lastSubmitTime < oneHourInMs)) {
+            document.querySelector('.submit-btn').disabled = true;
+            const remainingTime = (oneHourInMs - (currentTime - lastSubmitTime)) / 1000;
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = Math.floor(remainingTime % 60);
+            document.getElementById('errorMessage').textContent = `다음 제출은 ${minutes}분 ${seconds}초 후에 가능합니다.`;
         }
 
-        // 1. 파일을 외부 서버에 업로드 (임시로 Imgur API 사용 예시)
-        const uploadUrl = 'https://api.imgur.com/3/image';  // 업로드할 서버 URL
-        const clientId = 'your-client-id';  // Imgur API 클라이언트 ID
-
-        const imageFormData = new FormData();
-        imageFormData.append('image', file);
-
-        let imageUrl = '';
-
-        try {
-            const uploadResponse = await fetch(uploadUrl, {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Client-ID ' + clientId
-                },
-                body: imageFormData
-            });
-
-            const uploadResult = await uploadResponse.json();
-
-            if (uploadResult.success) {
-                imageUrl = uploadResult.data.link;  // 업로드된 이미지 URL
-            } else {
-                document.getElementById('errorMessage').textContent = '이미지 업로드에 실패했습니다.';
+        document.getElementById('surveyForm').onsubmit = async function(event) {
+            event.preventDefault();
+            
+            if (lastSubmitTime && (currentTime - lastSubmitTime < oneHourInMs)) {
+                const remainingTime = (oneHourInMs - (currentTime - lastSubmitTime)) / 1000;
+                const minutes = Math.floor(remainingTime / 60);
+                const seconds = Math.floor(remainingTime % 60);
+                document.getElementById('errorMessage').textContent = `다음 제출은 ${minutes}분 ${seconds}초 후에 가능합니다.`;
                 return;
             }
-        } catch (error) {
-            document.getElementById('errorMessage').textContent = '이미지 업로드 중 오류가 발생했습니다.';
-            return;
-        }
 
-        // 2. Discord 웹훅에 텍스트 + 이미지 URL 전송
-        const payload = {
-            content: "새 설문조사 제출됨",
-            embeds: [{
-                title: "설문조사 응답",
-                description: `
-                **닉네임:** ${formData.get('nickname')}
-                **디스코드 아이디:** ${formData.get('discordId')}
-                **이름:** ${formData.get('name')}
-                **나이:** ${formData.get('age')}
-                **키 / 몸무게:** ${formData.get('heightWeight')}
-                **자위 횟수:** ${formData.get('frequency')}
-                **개발 부위:** ${formData.get('developPart')}
-                **원하는 플레이:** ${formData.get('playPreference')}
-                **각오:** ${formData.get('determination')}
-                **전번:** ${formData.get('phone')}
-                **사는 곳:** ${formData.get('location')}
-                `,
-                image: {
-                    url: imageUrl  // 업로드된 이미지 URL
-                }
-            }]
-        };
+            const webhookUrl = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';
 
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
+            const formData = new FormData(event.target);
+            
+            const embedFields = [];
+            formData.forEach((value, key) => {
+                embedFields.push({ name: key, value: value || 'N/A', inline: false });
             });
 
-            if (response.ok) {
-                document.getElementById('successMessage').textContent = '설문이 성공적으로 제출되었습니다!';
-                document.getElementById('surveyForm').reset();
-            } else {
-                const errorText = await response.text();
-                document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 상태 코드: ${response.status}. 에러 메시지: ${errorText}`;
-            }
-        } catch (error) {
-            document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
-        }
-    };
-</script>
+            const data = {
+                username: 'Survey Bot',
+                embeds: [
+                    {
+                        title: '설문조사 결과',
+                        fields: embedFields,
+                        color: 3447003,
+                        timestamp: new Date()
+                    }
+                ]
+            };
 
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    localStorage.setItem('lastSubmitTime', new Date().getTime());
+                    alert('설문이 성공적으로 제출되었습니다!');
+                    event.target.reset();
+                } else if (response.status === 429) {
+                    alert('전송 속도 제한에 걸렸습니다. 잠시 후 다시 시도해주세요.');
+                } else {
+                    alert('설문 제출에 실패했습니다.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('오류가 발생했습니다. 다시 시도해주세요.');
+            }
+        };
+    </script>
 </body>
 </html>
