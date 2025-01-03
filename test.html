@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>설문조사</title>
+    <title>ㄴ설문조사</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -119,50 +119,51 @@
     </div>
 
     <script>
-    document.getElementById('surveyForm').onsubmit = async function(event) {
-        event.preventDefault();
+        document.getElementById('surveyForm').onsubmit = async function(event) {
+            event.preventDefault();
 
-        const webhookUrl = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';
+            const webhookUrl = 'https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY';
 
-        const formData = new FormData(event.target);
-        
-        const embedFields = [];
-        formData.forEach((value, key) => {
-            embedFields.push({ name: key, value: value || 'N/A', inline: false });
-        });
-
-        const data = {
-            username: 'Survey Bot',
-            embeds: [
-                {
-                    title: '설문조사 결과',
-                    fields: embedFields,
-                    color: 3447003,
-                    timestamp: new Date()
-                }
-            ]
-        };
-
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+            const formData = new FormData(event.target);
+            
+            const embedFields = [];
+            formData.forEach((value, key) => {
+                embedFields.push({ name: key, value: value || 'N/A', inline: false });
             });
 
-            if (response.ok) {
-                document.getElementById('errorMessage').textContent = '설문이 성공적으로 제출되었습니다!';
-                event.target.reset();
-            } else if (response.status === 429) {
-                document.getElementById('errorMessage').textContent = '전송 속도 제한에 걸렸습니다. 잠시 후 다시 시도해주세요.';
-            } else {
-                document.getElementById('errorMessage').textContent = '설문 제출에 실패했습니다.';
+            const data = {
+                username: 'Survey Bot',
+                embeds: [
+                    {
+                        title: '설문조사 결과',
+                        fields: embedFields,
+                        color: 3447003,
+                        timestamp: new Date()
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const responseData = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('errorMessage').textContent = '설문이 성공적으로 제출되었습니다!';
+                    event.target.reset();
+                } else {
+                    console.error('Response Error:', responseData);  // 응답 에러 출력
+                    document.getElementById('errorMessage').textContent = `설문 제출에 실패했습니다. 에러 코드: ${response.status}`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
             }
-        } catch (error) {
-            console.error('Error:', error);
-            document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
-        }
-    };
-</script>
+        };
+    </script>
 </body>
 </html>
