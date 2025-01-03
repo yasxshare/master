@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDSM 파트너 신청 설문조사</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      width: 50%;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .form-group textarea {
+      resize: vertical;
+    }
+    .submit-btn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BDSM 파트너 신청 설문조사</h1>
+    <form id="survey-form">
+      <div class="form-group">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="gender">성별:</label>
+        <select id="gender" name="gender" required>
+          <option value="male">남성</option>
+          <option value="female">여성</option>
+          <option value="other">기타</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="preferences">선호하는 역할:</label>
+        <select id="preferences" name="preferences" required>
+          <option value="dominant">지배적</option>
+          <option value="submissive">복종적</option>
+          <option value="switch">양쪽 모두</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">경험 수준:</label>
+        <select id="experience" name="experience" required>
+          <option value="beginner">초보</option>
+          <option value="intermediate">중급</option>
+          <option value="advanced">고급</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="comments">추가 사항:</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="특별한 요청사항이나 주의사항을 입력해주세요."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">제출</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('survey-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById('name').value,
+        gender: document.getElementById('gender').value,
+        preferences: document.getElementById('preferences').value,
+        experience: document.getElementById('experience').value,
+        comments: document.getElementById('comments').value
+      };
+
+      fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          content: `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${data.name}\n성별: ${data.gender}\n선호하는 역할: ${data.preferences}\n경험 수준: ${data.experience}\n추가 사항: ${data.comments}`
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('설문조사 결과가 제출되었습니다.');
+        document.getElementById('survey-form').reset();
+      })
+      .catch(error => {
+        alert('오류가 발생했습니다. 다시 시도해주세요.');
+      });
+    });
+  </script>
+</body>
+</html>
