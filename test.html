@@ -123,10 +123,16 @@
             const webhookUrl = 'https://discord.com/api/webhooks/your_webhook_url_here'; // 웹훅 URL을 여기에 입력하세요.
 
             const formData = new FormData(event.target);
-            
             const embedFields = [];
+
             formData.forEach((value, key) => {
-                embedFields.push({ name: key, value: value || 'N/A', inline: false });
+                // 사진 파일 처리 (URL로 변환 후 웹훅 메시지로 전송)
+                if (key === 'photo') {
+                    const photoUrl = await uploadPhoto(value);
+                    embedFields.push({ name: '사진', value: `[이미지 보기](${photoUrl})`, inline: false });
+                } else {
+                    embedFields.push({ name: key, value: value || 'N/A', inline: false });
+                }
             });
 
             const data = {
@@ -159,6 +165,12 @@
                 document.getElementById('errorMessage').textContent = '오류가 발생했습니다. 다시 시도해주세요.';
             }
         };
+
+        async function uploadPhoto(file) {
+            // 파일을 업로드할 서비스 (예: Discord 임시 업로드 서비스)에서 URL을 반환하는 함수
+            // 여기서는 가상으로 사진 URL을 반환합니다. 실제 업로드 API로 변경해야 합니다.
+            return 'https://your-uploaded-photo-url.com/photo.jpg';
+        }
     </script>
 </body>
 </html>
