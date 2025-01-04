@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ㄴBDSM 파트너 신청 설문조사</title>
+  <title>BDSM 파트너 신청 설문조사</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -86,18 +86,18 @@
       </div>
 
       <div class="form-group">
-        <label for="photos">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
-        <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" required>
+        <label for="photos">사진 업로드:</label>
+        <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png">
       </div>
 
       <div class="form-group">
         <label for="body_parts">개발하고 싶은 부위:</label>
-        <input type="text" id="body_parts" name="body_parts" required placeholder="애널, 유두, 클리">
+        <input type="text" id="body_parts" name="body_parts" required>
       </div>
 
       <div class="form-group">
         <label for="play">원하는 플레이나 하고 싶은 것:</label>
-        <input type="text" id="play" name="play" required placeholder="생활관리, 도그플, 야외노출(야노), 등">
+        <input type="text" id="play" name="play" required>
       </div>
 
       <div class="form-group">
@@ -130,6 +130,7 @@
       e.preventDefault();
 
       const formData = new FormData(this);
+      formData.append('content', `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${formData.get('name')}\n나이: ${formData.get('age')}\n키/몸무게/젖탱이 크기: ${formData.get('body')}\n하루 자위횟수: ${formData.get('masturbation')}\n개발하고 싶은 부위: ${formData.get('body_parts')}\n원하는 플레이: ${formData.get('play')}\n노예 각오: ${formData.get('submission')}\n전번: ${formData.get('phone') || '미입력'}\n사는 곳: ${formData.get('location') || '미입력'}\n인스타: ${formData.get('instagram') || '미입력'}`);
       
       fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
         method: 'POST',
