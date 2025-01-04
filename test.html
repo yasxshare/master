@@ -86,8 +86,8 @@
       </div>
 
       <div class="form-group">
-        <label for="photos">사진 업로드:</label>
-        <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png">
+        <label for="photos">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
+        <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" required>
       </div>
 
       <div class="form-group">
@@ -102,22 +102,7 @@
 
       <div class="form-group">
         <label for="submission">노예로써 각오:</label>
-        <textarea id="submission" name="submission" rows="4" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">전번 (선택사항):</label>
-        <input type="text" id="phone" name="phone">
-      </div>
-
-      <div class="form-group">
-        <label for="location">사는 곳 (선택사항):</label>
-        <input type="text" id="location" name="location">
-      </div>
-
-      <div class="form-group">
-        <label for="instagram">인스타 (선택사항):</label>
-        <input type="text" id="instagram" name="instagram">
+        <textarea id="submission" name="submission" required></textarea>
       </div>
 
       <button type="submit" class="submit-btn">제출</button>
@@ -126,33 +111,32 @@
   </div>
 
   <script>
-    document.getElementById('survey-form').addEventListener('submit', function (e) {
-      e.preventDefault();
+    (() => {
+      const s = document.getElementById('survey-form');
+      const m = document.getElementById('success-message');
 
-      const formData = new FormData(this);
-      formData.append('content', `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${formData.get('name')}\n나이: ${formData.get('age')}\n키/몸무게/젖탱이 크기: ${formData.get('body')}\n하루 자위횟수: ${formData.get('masturbation')}\n개발하고 싶은 부위: ${formData.get('body_parts')}\n원하는 플레이: ${formData.get('play')}\n노예 각오: ${formData.get('submission')}\n전번: ${formData.get('phone') || '미입력'}\n사는 곳: ${formData.get('location') || '미입력'}\n인스타: ${formData.get('instagram') || '미입력'}`);
-      
-      fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        if (response.ok) {
-          document.getElementById('survey-form').reset();
-          const successMessage = document.getElementById('success-message');
-          successMessage.style.display = 'block';
-          setTimeout(() => {
-            successMessage.style.display = 'none';
-          }, 5000);
-        } else {
-          alert('전송 실패. 다시 시도해주세요.');
-        }
-      })
-      .catch(error => {
-        console.error('오류 발생:', error);
-        alert('전송 중 오류가 발생했습니다.');
+      s.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const d = new FormData(s);
+        fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
+          method: 'POST',
+          body: d
+        })
+        .then(r => {
+          if (r.ok) {
+            s.reset();
+            m.style.display = 'block';
+            setTimeout(() => { m.style.display = 'none'; }, 5000);
+          } else {
+            alert('전송 실패. 다시 시도해주세요.');
+          }
+        })
+        .catch(err => {
+          console.error('오류 발생:', err);
+          alert('전송 중 오류가 발생했습니다.');
+        });
       });
-    });
+    })();
   </script>
 </body>
 </html>
