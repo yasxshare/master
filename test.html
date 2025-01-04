@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDSM 파트너 신청 설문조사</title>
+  <title>ㄴBDSM 파트너 신청 설문조사</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -64,7 +64,7 @@
 <body>
   <div class="container">
     <h1>BDSM 파트너 신청 설문조사</h1>
-    <form id="survey-form">
+    <form id="survey-form" enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">이름(본명):</label>
         <input type="text" id="name" name="name" required>
@@ -87,7 +87,7 @@
 
       <div class="form-group">
         <label for="photos">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
-        <textarea id="photos" name="photos" rows="4" placeholder="보지, 가슴, 민증, 암캐 인증 자세 등"></textarea>
+        <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" required>
       </div>
 
       <div class="form-group">
@@ -129,28 +129,11 @@
     document.getElementById('survey-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const data = {
-        name: document.getElementById('name').value,
-        age: document.getElementById('age').value,
-        body: document.getElementById('body').value,
-        masturbation: document.getElementById('masturbation').value,
-        photos: document.getElementById('photos').value,
-        body_parts: document.getElementById('body_parts').value,
-        play: document.getElementById('play').value,
-        submission: document.getElementById('submission').value,
-        phone: document.getElementById('phone').value || '미입력',
-        location: document.getElementById('location').value || '미입력',
-        instagram: document.getElementById('instagram').value || '미입력'
-      };
-
+      const formData = new FormData(this);
+      
       fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          content: `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${data.name}\n나이: ${data.age}\n키/몸무게/젖탱이 크기: ${data.body}\n하루 또는 일주일 자위횟수: ${data.masturbation}\n사진: ${data.photos}\n개발하고 싶은 부위: ${data.body_parts}\n원하는 플레이: ${data.play}\n노예로써 각오: ${data.submission}\n전번: ${data.phone}\n사는 곳: ${data.location}\n인스타: ${data.instagram}`
-        })
+        body: formData
       })
       .then(response => {
         if (response.ok) {
@@ -172,4 +155,3 @@
   </script>
 </body>
 </html>
-1
