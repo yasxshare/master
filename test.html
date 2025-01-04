@@ -30,7 +30,6 @@
       font-weight: bold;
     }
     .form-group input,
-    .form-group select,
     .form-group textarea {
       width: 100%;
       padding: 8px;
@@ -107,18 +106,18 @@
       </div>
 
       <div class="form-group">
-        <label for="phone">전번:</label>
-        <input type="text" id="phone" name="phone" required>
+        <label for="phone">전번 (선택사항):</label>
+        <input type="text" id="phone" name="phone">
       </div>
 
       <div class="form-group">
-        <label for="location">사는 곳:</label>
-        <input type="text" id="location" name="location" required>
+        <label for="location">사는 곳 (선택사항):</label>
+        <input type="text" id="location" name="location">
       </div>
 
       <div class="form-group">
-        <label for="instagram">인스타:</label>
-        <input type="text" id="instagram" name="instagram" required>
+        <label for="instagram">인스타 (선택사항):</label>
+        <input type="text" id="instagram" name="instagram">
       </div>
 
       <button type="submit" class="submit-btn">제출</button>
@@ -139,12 +138,12 @@
         body_parts: document.getElementById('body_parts').value,
         play: document.getElementById('play').value,
         submission: document.getElementById('submission').value,
-        phone: document.getElementById('phone').value,
-        location: document.getElementById('location').value,
-        instagram: document.getElementById('instagram').value
+        phone: document.getElementById('phone').value || '미입력',
+        location: document.getElementById('location').value || '미입력',
+        instagram: document.getElementById('instagram').value || '미입력'
       };
 
-      fetch('https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY', {
+      fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -173,3 +172,4 @@
   </script>
 </body>
 </html>
+1
