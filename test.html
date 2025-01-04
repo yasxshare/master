@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ㄴBDSM 파트너 신청 설문조사</title>
+  <title>BDSM 파트너 신청 설문조사</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -58,6 +58,7 @@
       font-weight: bold;
       text-align: center;
       margin-top: 15px;
+      display: none;
     }
   </style>
 </head>
@@ -121,7 +122,7 @@
       </div>
 
       <button type="submit" class="submit-btn">제출</button>
-      <div id="success-message" class="success-message" style="display: none;">전송되었습니다.</div>
+      <div id="success-message" class="success-message">전송되었습니다.</div>
     </form>
   </div>
 
@@ -143,7 +144,7 @@
         instagram: document.getElementById('instagram').value
       };
 
-      fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
+      fetch('https://discord.com/api/webhooks/1324314281411346503/KH0UKy1Y9UJoB5mTi7FzL-BQZ25px2awj_5FVZzNms4175Ibd6M0zST2UQZVsdk5kucY', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -152,16 +153,21 @@
           content: `새로운 BDSM 파트너 신청이 도착했습니다!\n이름: ${data.name}\n나이: ${data.age}\n키/몸무게/젖탱이 크기: ${data.body}\n하루 또는 일주일 자위횟수: ${data.masturbation}\n사진: ${data.photos}\n개발하고 싶은 부위: ${data.body_parts}\n원하는 플레이: ${data.play}\n노예로써 각오: ${data.submission}\n전번: ${data.phone}\n사는 곳: ${data.location}\n인스타: ${data.instagram}`
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('survey-form').reset();
-        document.getElementById('success-message').style.display = 'block';
-        setTimeout(function() {
-          document.getElementById('success-message').style.display = 'none';
-        }, 5000);  // 5초 후에 메시지를 숨깁니다
+      .then(response => {
+        if (response.ok) {
+          document.getElementById('survey-form').reset();
+          const successMessage = document.getElementById('success-message');
+          successMessage.style.display = 'block';
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 5000);
+        } else {
+          alert('전송 실패. 다시 시도해주세요.');
+        }
       })
       .catch(error => {
         console.error('오류 발생:', error);
+        alert('전송 중 오류가 발생했습니다.');
       });
     });
   </script>
