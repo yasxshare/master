@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ㄴBDSM 파트너 신청 설문조사</title>
+  <title>BDSM 파트너 신청 설문조사</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -69,70 +69,73 @@
         <label for="name">이름(본명):</label>
         <input type="text" id="name" name="name" required>
       </div>
-
       <div class="form-group">
         <label for="age">나이:</label>
         <input type="number" id="age" name="age" required>
       </div>
-
       <div class="form-group">
         <label for="body">키/몸무게/젖탱이 크기:</label>
         <input type="text" id="body" name="body" required>
       </div>
-
       <div class="form-group">
         <label for="masturbation">하루 또는 일주일 자위횟수:</label>
         <input type="text" id="masturbation" name="masturbation" required>
       </div>
-
       <div class="form-group">
         <label for="photos">사진 (보지와 종이에 닉네임 적어서 같이 찍어서 보내주세요):</label>
         <input type="file" id="photos" name="photos" accept=".jpg,.jpeg,.png" required>
       </div>
-
       <div class="form-group">
         <label for="body_parts">개발하고 싶은 부위:</label>
-        <input type="text" id="body_parts" name="body_parts" required>
+        <input type="text" id="body_parts" name="body_parts" required placeholder="애널, 유두, 클리">
       </div>
-
       <div class="form-group">
         <label for="play">원하는 플레이나 하고 싶은 것:</label>
-        <input type="text" id="play" name="play" required>
+        <input type="text" id="play" name="play" required placeholder="생활관리, 도그플, 야외노출(야노), 등">
       </div>
-
       <div class="form-group">
         <label for="submission">노예로써 각오:</label>
-        <textarea id="submission" name="submission" required></textarea>
+        <textarea id="submission" name="submission" rows="4" required></textarea>
       </div>
-
+      <div class="form-group">
+        <label for="phone">전번 (선택사항):</label>
+        <input type="text" id="phone" name="phone">
+      </div>
+      <div class="form-group">
+        <label for="location">사는 곳 (선택사항):</label>
+        <input type="text" id="location" name="location">
+      </div>
+      <div class="form-group">
+        <label for="instagram">인스타 (선택사항):</label>
+        <input type="text" id="instagram" name="instagram">
+      </div>
       <button type="submit" class="submit-btn">제출</button>
       <div id="success-message" class="success-message">전송되었습니다.</div>
     </form>
   </div>
 
   <script>
-    (() => {
-      const s = document.getElementById('survey-form');
-      const m = document.getElementById('success-message');
-
-      s.addEventListener('submit', function (e) {
+    (function () {
+      const form = document.getElementById('survey-form');
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
-        const d = new FormData(s);
+        const data = new FormData(form);
         fetch('https://discord.com/api/webhooks/1324696127303450694/kkaXxol3eYp0vC0AJpO08eRWlya0WzWKW9IjqGeKS2z_GqItcRlauleDkr126RkKkbjz', {
           method: 'POST',
-          body: d
-        })
-        .then(r => {
-          if (r.ok) {
-            s.reset();
-            m.style.display = 'block';
-            setTimeout(() => { m.style.display = 'none'; }, 5000);
+          body: data
+        }).then(response => {
+          if (response.ok) {
+            form.reset();
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+            }, 5000);
           } else {
             alert('전송 실패. 다시 시도해주세요.');
           }
-        })
-        .catch(err => {
-          console.error('오류 발생:', err);
+        }).catch(error => {
+          console.error('오류 발생:', error);
           alert('전송 중 오류가 발생했습니다.');
         });
       });
